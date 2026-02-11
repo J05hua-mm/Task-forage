@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {Link} from 'react-router';
 
 const Register = () => {
 
@@ -11,6 +12,7 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-sm bg-white p-6 rounded shadow"
@@ -40,6 +42,13 @@ const Register = () => {
             required
           />
         </div>
+
+         <p className="text-sm text-center mt-4">
+         Already have an account?{" "}
+         <Link to="/login" className="text-blue-600 underline">
+         Login
+        </Link>
+        </p>
 
         <button
           type="submit"

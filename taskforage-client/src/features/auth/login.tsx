@@ -1,12 +1,19 @@
 import { useState } from 'react';
+import { Link,useNavigate } from 'react-router';
+import { useAppDispatch } from '../../app/hooks';
+import { loginSuccess } from './authslice';
 
 const Login = () => {
 
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     const handleSubmit = (e:React.FormEvent) => {
       e.preventDefault();
+      dispatch(loginSuccess());
+      navigate('/dashboard');
     }
 
     return (
@@ -40,6 +47,13 @@ const Login = () => {
             required
           />
         </div>
+
+        <p className="text-sm text-center mt-4">
+         Don’t have an account?{" "}
+        <Link to="/register" className="text-blue-600 underline">
+         Sign up
+        </Link>
+       </p>
 
         <button
           type="submit"

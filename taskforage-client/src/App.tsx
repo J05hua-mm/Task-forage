@@ -1,15 +1,32 @@
 import Login from './features/auth/login';
 import Register from './features/auth/register';
+import { BrowserRouter,Routes,Route,Outlet,Navigate } from 'react-router';
+import Dashboard from './pages/dashboard';
 
+
+const ProtectedRoute = ({isAuthenticated}:{isAuthenticated:boolean}) => {
+  return (
+    isAuthenticated ? <Outlet/> : <Navigate to = "/login" replace />
+  )
+}
 
 const App = () => {
-  
+
+  const isAuthenticated:boolean = false;
+
+
   return (
-  <div className="min-h-screen flex items-center justify-center bg-gray-100">
-     <h1 className="text-3xl font-bold text-green-600">
-      Tailwind v4 is working
-    </h1>
-    </div>
+  <BrowserRouter>
+  <Routes>
+    <Route path='/login' element={<Login/>}/>
+    <Route path='/register' element={<Register/>}/>
+
+    <Route element={<ProtectedRoute isAuthenticated={isAuthenticated}/>}>
+     <Route path='/dashboard' element={<Dashboard/>}/>
+    </Route>
+   
+  </Routes>
+  </BrowserRouter>
   )
 }
 
