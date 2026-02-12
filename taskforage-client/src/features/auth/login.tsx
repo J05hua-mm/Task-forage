@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link,useNavigate } from 'react-router';
 import { useAppDispatch } from '../../app/hooks';
-import { loginSuccess } from './authslice';
+import { loginSuccess } from './authSlice.ts';
+import {api} from '../../services/api.ts';
 
 const Login = () => {
 
@@ -10,11 +11,27 @@ const Login = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const handleSubmit = (e:React.FormEvent) => {
+    const handleSubmit = async (e:React.FormEvent) => {
       e.preventDefault();
+      
+
+      try {
+      const res = await api.post("/login", {
+        email,
+        password,
+      })
+      localStorage.setItem("token",res.data.token);
       dispatch(loginSuccess());
       navigate('/dashboard');
+
+      } catch (error) {
+      alert('Invalid credentials');
+      }
+
+      
     }
+
+useEffect(() => console.log(api));
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
