@@ -5,7 +5,7 @@ type AuthState = {
 }
 
 const initialState:AuthState = {
-    isAuthentiated:localStorage.getItem("isAuthenticated") === "true",
+    isAuthentiated:!!localStorage.getItem("token"),
 }
 
 const authSlice = createSlice({
@@ -14,11 +14,10 @@ const authSlice = createSlice({
     reducers:{
      loginSuccess(state) {
         state.isAuthentiated = true;
-        localStorage.setItem("isAuthenticated",'true');
      },
      logout(state) {
         state.isAuthentiated = false;
-        localStorage.removeItem("isAuthenticated");
+        localStorage.removeItem('token');
      },
     },
 });

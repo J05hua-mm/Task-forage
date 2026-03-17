@@ -31,7 +31,6 @@ const Login = () => {
       
     }
 
-useEffect(() => console.log(api));
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">

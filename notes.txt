@@ -1,0 +1,15 @@
+How authentication works in your app
+authentication is done by using jwt and using authorization token
+
+How projects are linked to users
+by using userId to every prject created
+
+How middleware protects routes
+it checks the request header and look for authoriztion token and verifies it
+
+
+Why you used Axios interceptors
+it gives more clean repitive code function.
+
+How you debugged the delete issue
+i checked the controller and there was no response method then updating resolved the issue
